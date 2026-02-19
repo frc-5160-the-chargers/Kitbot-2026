@@ -32,7 +32,6 @@ import java.util.function.DoubleSupplier;
 
 // all of our things are brushed
 
-
 public class DriveIOSpark implements DriveIO {
   private final SparkMax leftLeader = new SparkMax(leftLeaderCanId, MotorType.kBrushed);
   private final SparkMax rightLeader = new SparkMax(rightLeaderCanId, MotorType.kBrushed);
