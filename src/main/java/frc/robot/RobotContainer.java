@@ -106,6 +106,7 @@ public class RobotContainer {
     controller.L1().whileTrue(superstructure.intake());
     controller.R1().whileTrue(superstructure.launch());
     controller.cross().whileTrue(superstructure.eject());
+    controller.square().whileTrue(superstructure.testFeeder());
   }
 
   /**

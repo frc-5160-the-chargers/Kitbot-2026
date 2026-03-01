@@ -57,6 +57,13 @@ public class Superstructure extends SubsystemBase {
         });
   }
 
+  public Command testFeeder() {
+    return run(
+        () -> {
+          io.setFeederVoltage(spinUpFeederVoltage);
+        });
+  }
+
   /** Set the rollers to the values for launching. Spins up before feeding fuel. */
   public Command launch() {
     return run(() -> {
