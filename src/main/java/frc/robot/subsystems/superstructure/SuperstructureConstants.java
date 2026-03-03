@@ -16,10 +16,10 @@ public class SuperstructureConstants {
   public static final double intakeLauncherMotorReduction = 1.0;
   public static final int intakeLauncherCurrentLimit = 60;
 
-  public static final double intakingFeederVoltage = -12.0;
-  public static final double intakingIntakeVoltage = 10.0;
-  public static final double launchingFeederVoltage = 9.0;
-  public static final double launchingLauncherVoltage = 10.6;
-  public static final double spinUpFeederVoltage = -6.0;
-  public static final double spinUpSeconds = 1.0;
+  public static final double intakingFeederVoltage = -9.0;
+  public static final double intakingIntakeVoltage = 4.0;
+  public static final double launchingFeederVoltage = 10.0;
+  public static final double launchingLauncherVoltage = -11.0;
+  public static final double spinUpFeederVoltage = 0;
+  public static final double spinUpSeconds = 1.5;
 }

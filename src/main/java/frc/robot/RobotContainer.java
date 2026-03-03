@@ -69,7 +69,8 @@ public class RobotContainer {
     }
 
     // Set up auto routines
-    NamedCommands.registerCommand("Launch", superstructure.launch().withTimeout(6.0));
+    NamedCommands.registerCommand(
+        "Launch", superstructure.launchOrFeed(() -> false).withTimeout(6.0));
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
 
     // Set up SysId routines
@@ -104,7 +105,7 @@ public class RobotContainer {
 
     // Control bindings for superstructure
     controller.L1().whileTrue(superstructure.intake());
-    controller.R1().whileTrue(superstructure.launch());
+    controller.R1().whileTrue(superstructure.launchOrFeed(controller.triangle()));
     controller.cross().whileTrue(superstructure.eject());
     controller.square().whileTrue(superstructure.testFeeder());
   }

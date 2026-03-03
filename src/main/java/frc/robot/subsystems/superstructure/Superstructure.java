@@ -11,10 +11,10 @@ import static frc.robot.subsystems.superstructure.SuperstructureConstants.intaki
 import static frc.robot.subsystems.superstructure.SuperstructureConstants.launchingFeederVoltage;
 import static frc.robot.subsystems.superstructure.SuperstructureConstants.launchingLauncherVoltage;
 import static frc.robot.subsystems.superstructure.SuperstructureConstants.spinUpFeederVoltage;
-import static frc.robot.subsystems.superstructure.SuperstructureConstants.spinUpSeconds;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import java.util.function.BooleanSupplier;
 import org.littletonrobotics.junction.Logger;
 
 public class Superstructure extends SubsystemBase {
@@ -68,22 +68,37 @@ public class Superstructure extends SubsystemBase {
   }
 
   /** Set the rollers to the values for launching. Spins up before feeding fuel. */
-  public Command launch() {
+  public Command launchOrFeed(BooleanSupplier shouldFeed) {
     return run(() -> {
-          io.setFeederVoltage(spinUpFeederVoltage);
+          // io.setFeederVoltage(spinUpFeederVoltage);
           io.setIntakeLauncherVoltage(launchingLauncherVoltage);
+          if (shouldFeed.getAsBoolean()) {
+            io.setFeederVoltage(launchingFeederVoltage);
+          } else {
+            io.setFeederVoltage(0.0);
+          }
         })
-        .withTimeout(spinUpSeconds)
-        .andThen(
-            run(
-                () -> {
-                  io.setFeederVoltage(launchingFeederVoltage);
-                  io.setIntakeLauncherVoltage(launchingLauncherVoltage);
-                }))
+        // .withTimeout(spinUpSeconds)
+        // .andThen(
+        //     run(
+        //         () -> {
+        //           io.setFeederVoltage(launchingFeederVoltage);
+        //           io.setIntakeLauncherVoltage(launchingLauncherVoltage);
+        //         }))
         .finallyDo(
             () -> {
               io.setFeederVoltage(0.0);
               io.setIntakeLauncherVoltage(0.0);
+            });
+  }
+
+  public Command feed() {
+    return run(() -> {
+          io.setFeederVoltage(launchingFeederVoltage);
+        })
+        .finallyDo(
+            () -> {
+              io.setFeederVoltage(0.0);
             });
   }
 }

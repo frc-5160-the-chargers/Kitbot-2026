@@ -34,7 +34,7 @@ public class SuperstructureIOSpark implements SuperstructureIO {
     var feederConfig = new SparkMaxConfig();
     feederConfig
         .idleMode(IdleMode.kBrake)
-        .inverted(true)
+        .inverted(false)
         .smartCurrentLimit(feederCurrentLimit)
         .voltageCompensation(12.0);
     feederConfig
