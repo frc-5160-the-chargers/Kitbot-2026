@@ -25,8 +25,8 @@ import java.util.function.DoubleSupplier;
  * relevant instances of "SparkMax" with "SparkFlex".
  */
 public class SuperstructureIOSpark implements SuperstructureIO {
-  private final SparkMax feeder = new SparkMax(feederCanId, MotorType.kBrushless);
-  private final SparkMax intakeLauncher = new SparkMax(intakeLauncherCanId, MotorType.kBrushless);
+  private final SparkMax feeder = new SparkMax(feederCanId, MotorType.kBrushed);
+  private final SparkMax intakeLauncher = new SparkMax(intakeLauncherCanId, MotorType.kBrushed);
   private final RelativeEncoder feederEncoder = feeder.getEncoder();
   private final RelativeEncoder intakeLauncherEncoder = intakeLauncher.getEncoder();
 
@@ -34,6 +34,7 @@ public class SuperstructureIOSpark implements SuperstructureIO {
     var feederConfig = new SparkMaxConfig();
     feederConfig
         .idleMode(IdleMode.kBrake)
+        .inverted(false)
         .smartCurrentLimit(feederCurrentLimit)
         .voltageCompensation(12.0);
     feederConfig
@@ -54,7 +55,7 @@ public class SuperstructureIOSpark implements SuperstructureIO {
     intakeLauncherConfig
         .idleMode(IdleMode.kBrake)
         .smartCurrentLimit(intakeLauncherCurrentLimit)
-        .inverted(true)
+        .inverted(false)
         .voltageCompensation(12.0);
     intakeLauncherConfig
         .encoder
